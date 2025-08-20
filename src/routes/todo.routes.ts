@@ -23,17 +23,20 @@ deleteNotification,
 createNotification,
 viewNotification
 }from"../controllers/NoteController"
+import { saveSubscription } from '../controllers/webpushController';
 import { authenticates } from "../middleware/authenticate";
 import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node';
 const router = express.Router();
-
+// import { saveSubscription, sendTestPush } from "../controllers/pushController";
 import { attachUserId } from '../middleware/attachUserId';
 router.get("/task/allmail",allmail);
+// router.post("/subscribe", saveSubscription);
+// router.post("/send-test", sendTestPush);
 
 // router.get("/task/share",getShared);
 // router.post("/task/share",postShared);
 // router.delete("/task/share/:id",deleteShared);
-
+router.post('/subscribe', saveSubscription);
 router.get("/task/notifications",getNotifications);
 router.delete("/task/notifications/:id",deleteNotification);
 router.post("/task/notifications",createNotification);

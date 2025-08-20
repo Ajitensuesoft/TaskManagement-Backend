@@ -11,8 +11,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import authroutes from "./routes/auth.routes";
 import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node';
-
-
+import "./taskRemainder";
+import webpush from "web-push";
 
 dotenv.config();
 connectDB();
@@ -32,6 +32,9 @@ app.get("/", (req: Request, res: Response) => {
   res.send("hello")
 })
 
+
+// const vapidKeys = webpush.generateVAPIDKeys();
+// console.log("vapidKeys",vapidKeys);
 
 
 app.use(cookieParser());

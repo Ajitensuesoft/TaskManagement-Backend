@@ -96,6 +96,7 @@ export const signin = async (req: Request, res: Response) => {
 console.log("token",token);
 res.cookie('token', token, options).json({
   message: "Signin successful",
+  id:userexist._id,
   email:email,
   token:token,
   options:options

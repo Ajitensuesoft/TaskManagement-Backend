@@ -6,7 +6,12 @@ export interface ITodo extends Document {
   status?: string; // no enum restriction
   userId: string;
   priority:string
-  default:string
+  default:string;
+  duedate:Date,
+twohourremaindersent?:boolean,
+onehourremaindersent?:boolean,
+thirtyminuteremaindersent?:boolean,
+taskexpired?:boolean
 }
 
 const todoSchema = new Schema<ITodo>(
@@ -33,6 +38,26 @@ const todoSchema = new Schema<ITodo>(
       type:String,
        enum:["Low","Medium","Hard"],
        default:"Medium"
+    },
+    duedate:{
+type:Date,
+required:true,
+    },
+    twohourremaindersent:{
+      type:Boolean,
+      default:false,
+    },
+     onehourremaindersent:{
+      type:Boolean,
+      default:false,
+    },
+     thirtyminuteremaindersent:{
+      type:Boolean,
+      default:false,
+    },
+    taskexpired:{
+      type:Boolean,
+      default:false
     }
   },
   { timestamps: true }
