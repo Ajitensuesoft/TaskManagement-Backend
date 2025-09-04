@@ -28,7 +28,8 @@ export const inviteUser = async (req: Request, res: Response) => {
       token
     });
 
-    const inviteLink = `http://localhost:5173/invite/accept/${token}`;
+    // const inviteLink = `http://localhost:5173/invite/accept/${token}`;
+    const inviteLink = `https://taskmanagment-frontend-six.vercel.app/invite/accept/${token}`
     await sendEmail(email, 'Invite to join workspace', `You've been invited by ${userId}. Accept here: ${inviteLink}`);
 
     const savedInvite = await invite.save();

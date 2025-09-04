@@ -26,7 +26,8 @@ const app = express();
 //   })(req, res, next);
 // });
 app.use(cors({
-  origin: "http://localhost:5173",
+  // origin: "http://localhost:5173",
+  origin:"https://taskmanagment-frontend-six.vercel.app/",
   credentials: true
 }))
 app.get("/", (req: Request, res: Response) => {
