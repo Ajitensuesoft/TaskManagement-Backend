@@ -2,7 +2,7 @@ import {Request,Response} from "express"
 import Sharedmodel from "../models/Sharedmodel"
 import NotificationModel from "../models/NotificationModel"
 import todoModel from "../models/todo.model";
-
+import History from "../models/HistoryModel";
 
 
 // export const getShared=async(req:Request,res:Response)=>{
@@ -38,16 +38,27 @@ import todoModel from "../models/todo.model";
 //   }
 // };
 export const getShared = async (req: Request, res: Response) => {
+  let workspaceId=req.params.workspaceId;
+  console.log("workspaceID OF GETSHARED",workspaceId);
   try {
-    const { email } = req.query; // email of the sender
+    // const { email } = req.query; // email of the sender
 
-    if (!email || typeof email !== "string") {
-      return res.status(400).json({ message: "Sender email is required" });
-    }
-
+    // if (!email || typeof email !== "string") {
+    //   return res.status(400).json({ message: "Sender email is required" });
+    // }
+    // console.log(localStorage.getItem("email"));
+//  localStorage.getItem("email")
     // Find all shared tasks where 'from' matches the sender's email
-    const shared = await Sharedmodel.find({ from: email }).sort({ createdAt: -1 });
-    
+    const shared = await Sharedmodel.find({ workspaceId:workspaceId }).sort({ createdAt: -1 });
+    const Hist = await History.create({
+        workspaceId:workspaceId,
+      userId: "blank",
+      taskId: "All task",
+      taskname: "All shared Task",
+      action: "SHARE",
+      details: { sharedwith: "gamer" }
+    })
+    console.log("history of updated", Hist);
     return res.status(200).json({
       data: shared,
     });
@@ -59,9 +70,11 @@ export const getShared = async (req: Request, res: Response) => {
   }
 };
 export const postShared = async (req: Request, res: Response) => {
+    let workspaceId=req.params.workspaceId;
+    console.log("workspaceId in postshared",workspaceId);
   try {
     const {from, to, title, taskId } = req.body;
-
+console.log("shared",from, to, title, taskId);
     // get sender's email from Clerk or JWT auth
     // const senderEmail =  req.body.from; 
     // console.log("senderemail",senderEmail);
@@ -71,6 +84,7 @@ export const postShared = async (req: Request, res: Response) => {
     // }
 
     const shared = await Sharedmodel.create({
+     
       from,
       to,
       title,
@@ -78,6 +92,15 @@ export const postShared = async (req: Request, res: Response) => {
     });
 
     console.log("shared", shared);
+     const Hist = await History.create({
+        workspaceId:workspaceId,
+      userId:(req as any).userId,
+      taskId: taskId,
+      taskname: title,
+      action: "SHARE",
+      details: { sharedwith: to }
+    })
+    console.log("history of updated", Hist);
     return res.status(201).json({ data: shared });
 
   } catch (err) {
@@ -95,6 +118,9 @@ export const deleteShared = async (req: Request, res: Response) => {
     if (!deleted) {
       return res.status(404).json({ message: "Shared record not found" });
     }
+ 
+   
+  
 
     return res.status(200).json({ message: "Shared task removed successfully" });
   } catch (err) {
@@ -109,15 +135,17 @@ export const deleteShared = async (req: Request, res: Response) => {
 
 
 export const createNotification = async (req: Request, res: Response) => {
+  let workspaceId=req.params.workspaceId;
+  console.log("notification workspaceId",workspaceId);
   try {
-    const { from, message,to,taskId } = req.body;
-    console.log('getnotification',from ,message,to);
+    const { from, message,to,taskId,userId} = req.body;
+    console.log('getnotification',from ,message,to,userId);
 
     if (!from || !message) {
       return res.status(400).json({ message: "From and message are required" });
     }
 
-    const notification = await NotificationModel.create({ from, message,to,taskId });
+    const notification = await NotificationModel.create({ from, message,to,taskId,userId,workspaceId});
 console.log("notification",notification);
     return res.status(201).json({
       message: "Notification created successfully",
@@ -141,15 +169,17 @@ console.log("notification",notification);
 //   }
 // };
 export const getNotifications = async (req: Request, res: Response) => {
+  let workspaceId=req.params.workspaceId;
+  console.log("getnotification workspace",workspaceId);
   try {
     const email = req.query.email as string; // receiver email
     console.log("email",email);
-    if (!email) {
-      return res.status(400).json({ message: "Receiver email is required" });
-    }
+    // if (!email) {
+    //   return res.status(400).json({ message: "Receiver email is required" });
+    // }
 
     // Only get notifications for this receiver
-    const notifications = await NotificationModel.find({ to: email });
+    const notifications = await NotificationModel.find({ workspaceId:workspaceId });
 console.log("notifications",notifications);
     res.status(200).json({ data: notifications });
   } catch (err) {

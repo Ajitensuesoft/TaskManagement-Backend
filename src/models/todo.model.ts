@@ -1,5 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
+import { IWorkspace } from "./WorkSpaceModel";
+
 export interface ITodo extends Document {
   title: string;
   description?: string;
@@ -11,7 +13,17 @@ export interface ITodo extends Document {
 twohourremaindersent?:boolean,
 onehourremaindersent?:boolean,
 thirtyminuteremaindersent?:boolean,
-taskexpired?:boolean
+taskexpired?:boolean,
+important:boolean,
+archieved?:boolean,
+workspaceId?:IWorkspace|mongoose.Schema.Types.ObjectId,
+ customFields?: {
+    id?: string;
+    label?: string;
+    type?: string;
+    value?: any;
+    options?: string[];
+  }[];
 }
 
 const todoSchema = new Schema<ITodo>(
@@ -58,8 +70,34 @@ required:true,
     taskexpired:{
       type:Boolean,
       default:false
+    },
+    important:{
+      type:Boolean,
+      default:false
+    },
+    archieved:{
+      type:Boolean,
+      default:false
+    },
+    workspaceId:{
+       type:Schema.Types.ObjectId,
+       ref:'Workspace'
+    },
+    customFields: {
+  type: [
+    {
+      id: { type: String },
+      label: { type: String },
+      type: { type: String },
+      value: { type: mongoose.Schema.Types.Mixed },
+      options: [{ type: String }],
     }
+  ],
+  default: [],
+}
+
   },
+
   { timestamps: true }
 );
 

@@ -5,6 +5,8 @@ export interface INotification extends Document {
   message: string;
   to:string;
   taskId:string;
+  userId:string;
+  workspaceId?:string;
 }
 
 const notificationSchema = new Schema<INotification>(
@@ -13,6 +15,8 @@ const notificationSchema = new Schema<INotification>(
     message: { type: String, required: true },
     to: { type: String, required: true },
       taskId: { type: String, required: true },
+      userId:{type:String,required:true},
+      workspaceId:{type:String},
   },
   { timestamps: true } // So you know when it was sent
 );

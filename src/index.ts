@@ -13,10 +13,11 @@ import authroutes from "./routes/auth.routes";
 import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node';
 import "./taskRemainder";
 import webpush from "web-push";
+import { acceptInvitation } from './controllers/InvitingController';
 
 dotenv.config();
 connectDB();
-
+const PORT=process.env.PORT 
 const app = express();
 // app.options('*', (req: Request, res: Response, next: NextFunction) => {
 //   cors({
@@ -32,11 +33,12 @@ app.get("/", (req: Request, res: Response) => {
   res.send("hello")
 })
 
+app.post('/invite/accept/:invitationToken',acceptInvitation);
 
 // const vapidKeys = webpush.generateVAPIDKeys();
 // console.log("vapidKeys",vapidKeys);
 
-
+// app.post('/invite/accept/:token', acceptInvitation);
 app.use(cookieParser());
 // app.use(express.json());
 // app.use(express.json());
@@ -94,10 +96,11 @@ app.post(
   }
 );
 app.use(express.json());
+// app.post('/invite/accept/:token', acceptInvitation);
 // app.use(ClerkExpressWithAuth); 
 app.use("/api/v1",routes);
 app.use("/api/auth", authroutes);
-const PORT =  5000;
+// const PORT =  5000;
 app.listen(PORT, () => {
   console.log(` Server running on port ${PORT}`);
 });

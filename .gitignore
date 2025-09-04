@@ -1,1 +1,14 @@
+
+# Runtime files
+*.log
+*.pid
+
+# Environment secrets
 .env
+.env.test
+.env.production
+
+# Database dumps
+*.sql
+*.sqlite
+dump.rdb

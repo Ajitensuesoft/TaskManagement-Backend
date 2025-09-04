@@ -1,5 +1,5 @@
 import mongoose,{Schema,Document} from "mongoose";
-
+import { IWorkspace } from "./WorkSpaceModel";
 
 export interface HistoryData extends Document{
     userId:string,
@@ -7,6 +7,8 @@ export interface HistoryData extends Document{
     taskname:string,
     action:string,
     details:object,
+    workspaceId?:IWorkspace|mongoose.Schema.Types.ObjectId,
+    
 }
 
 
@@ -31,7 +33,11 @@ const HistoryScehma:Schema<HistoryData>=new Schema<HistoryData>({
          details:{
             type:Object,
             required:true,
-         }
+         },
+          workspaceId:{
+       type:Schema.Types.ObjectId,
+       ref:'workspace'
+    }
         },{timestamps:true});
 
         const History:mongoose.Model<HistoryData>= mongoose.model<HistoryData>("History",HistoryScehma);
