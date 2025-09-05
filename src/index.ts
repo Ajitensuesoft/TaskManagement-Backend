@@ -31,11 +31,6 @@ const allowedOrigins = [
   "https://taskmanagment-frontend-ruddy.vercel.app",
 ];
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://taskmanagment-frontend-six.vercel.app",
-  "https://taskmanagment-frontend-ruddy.vercel.app", // ✅ add this
-];
 
 app.use(
   cors({
