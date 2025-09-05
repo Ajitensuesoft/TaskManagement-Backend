@@ -31,13 +31,28 @@ const allowedOrigins = [
   "https://taskmanagment-frontend-ruddy.vercel.app",
 ];
 
-// ✅ CORS Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://taskmanagment-frontend-six.vercel.app",
+  "https://taskmanagment-frontend-ruddy.vercel.app", // ✅ add this
+];
+
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.warn(`❌ CORS blocked request from: ${origin}`);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 
 // ✅ Basic test route
 app.get("/", (req: Request, res: Response) => {
