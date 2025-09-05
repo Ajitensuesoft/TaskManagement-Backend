@@ -60,7 +60,7 @@
 // const router = express.Router();
 // // import { saveSubscription, sendTestPush } from "../controllers/pushController";
 // import { attachUserId } from '../middleware/attachUserId';
-// // router.put("/task/archieved/:id", archieved);
+// // router.put("/task/archieved/:id",authenticates,archieved);
 // router.get("/task/allmail",allmail);
 
 // // router.post("/subscribe", saveSubscription);
@@ -88,23 +88,23 @@
 
 
 // //here from 91 to 97 code i wrote down
-// router.post("/task/createworkspace", createworspace);
-// router.put("/task/comment/:editingId", updateComment);
-// router.delete("/task/comment/:id", deletecomment);
-// router.get('/task/:workspaceId',  getTodos);
-// router.post('/task/:workspaceId',  createTodo);
-// router.put('/task/:id/:workspaceId', updateTodo);
-// router.delete('/task/:id/:workspaceId', deleteTodo);
-// router.post("/task/sharetodo", sharetodo )
+// router.post("/task/createworkspace",authenticates,createworspace);
+// router.put("/task/comment/:editingId",authenticates,updateComment);
+// router.delete("/task/comment/:id",authenticates,deletecomment);
+// router.get('/task/:workspaceId',authenticates, getTodos);
+// router.post('/task/:workspaceId',authenticates, createTodo);
+// router.put('/task/:id/:workspaceId',authenticates,updateTodo);
+// router.delete('/task/:id/:workspaceId',authenticates,deleteTodo);
+// router.post("/task/sharetodo",authenticates,sharetodo )
 // router.get("/task/allmail",allmail);
 
-// router.get("/task/share/", getShared);
-// router.post("/task/share/", postShared);
-// router.delete("/task/share/:id", deleteShared);
+// router.get("/task/share/",authenticates,getShared);
+// router.post("/task/share/",authenticates,postShared);
+// router.delete("/task/share/:id",authenticates,deleteShared);
 
-// router.get("/task/notifications", getNotifications);
-// router.delete("/task/notifications/:id", deleteNotification);
-// router.post("/task/notifications", createNotification);
+// router.get("/task/notifications",authenticates,getNotifications);
+// router.delete("/task/notifications/:id",authenticates,deleteNotification);
+// router.post("/task/notifications",authenticates,createNotification);
 
 // // router.get('/task',attachUserId, getTodos);
 // // router.post('/task',attachUserId, createTodo);
@@ -114,41 +114,41 @@
 
 // //bulk delete or complete
 
-// router.post("/task/bulkcomplete", bulkCompleteTodos);
-// router.post("/task/bulkdelete", bulkDeleteTodos);
+// router.post("/task/bulkcomplete",authenticates,bulkCompleteTodos);
+// router.post("/task/bulkdelete",authenticates,bulkDeleteTodos);
 
-// // router.get("/task/viewnotification/:id", viewNotification);
-// router.get("/task/viewnotification/:id",   viewNotification);
-
-
-// router.get("/task/history/:workspaceId", HistoryController);
-// router.post("/task/history/delete", DeleteHistory);
-// router.post("/task/csvdata", createCsv);
-// router.post("/task/importantupdate/:id", importantupdate);
+// // router.get("/task/viewnotification/:id",authenticates,viewNotification);
+// router.get("/task/viewnotification/:id", authenticates, viewNotification);
 
 
+// router.get("/task/history/:workspaceId",authenticates,HistoryController);
+// router.post("/task/history/delete",authenticates,DeleteHistory);
+// router.post("/task/csvdata",authenticates,createCsv);
+// router.post("/task/importantupdate/:id",authenticates,importantupdate);
 
 
 
-// router.get("/task/:id",   getTodoById);
-// router.get("/todos/:todoId/checklist",   getChecklistItems);
-// router.post("/todos/:todoId/checklist",   createChecklistItem);
-// router.put("/checklist/:id",   updateChecklistItem); 
-// router.delete("/checklist/:id",   deleteChecklistItem);
+
+
+// router.get("/task/:id", authenticates, getTodoById);
+// router.get("/todos/:todoId/checklist", authenticates, getChecklistItems);
+// router.post("/todos/:todoId/checklist", authenticates, createChecklistItem);
+// router.put("/checklist/:id", authenticates, updateChecklistItem); 
+// router.delete("/checklist/:id", authenticates, deleteChecklistItem);
 
 
 // //for archieved
 
-// router.put("/task/archieved/:id", archieved);
+// router.put("/task/archieved/:id",authenticates,archieved);
 
 
-// router.get("/task/workdata/:id", workdata);
-// router.put("/task/workupdate/:id", workupdate);
-// router.delete("/task/workdelete/:id", workdelete);
+// router.get("/task/workdata/:id",authenticates,workdata);
+// router.put("/task/workupdate/:id",authenticates,workupdate);
+// router.delete("/task/workdelete/:id",authenticates,workdelete);
 
 
 // //get checklist of workview
-// router.get("/task/getworkchecklistdata/:id", getworkChecklistdata);
+// router.get("/task/getworkchecklistdata/:id",authenticates,getworkChecklistdata);
 // router.put('/task/workupdate/checklist/:id', updateChecklist);
 // router.delete('/task/workupdate/checklist/:id', deleteChecklist);
 
@@ -156,39 +156,35 @@
 
 // //created invited people
 
-// router.post("/task/createdinvited/:id", createInvited);
-// router.get("/task/createdinvited/:id", getInvited);
+// router.post("/task/createdinvited/:id",authenticates,createInvited);
+// router.get("/task/createdinvited/:id",authenticates,getInvited);
 
 
 
 // //comments
 
-// router.get("/task/allcomment/:taskId", showallcomment);
-// router.post("/task/comment/:id", createComment);
-// router.put("/task/comment/:editingId", updateComment);
-// router.delete("/task/comment/:id", deletecomment);
+// router.get("/task/allcomment/:taskId",authenticates,showallcomment);
+// router.post("/task/comment/:id",authenticates,createComment);
+// router.put("/task/comment/:editingId",authenticates,updateComment);
+// router.delete("/task/comment/:id",authenticates,deletecomment);
 
 
 // //create workspace
 
-// router.post("/task/createworkspace", createworspace);
-// router.get("/getworkspace", getworspace);
-// router.delete("/deleteworkspace/:workspaceId", deleteworkspace);
-// router.post("/inviteruser", inviteUser);
-// // router.get("/task/getworkspace", getWorkspace);
-// // router.put("/task/updateworkspace/:id", updateWorkspace);
-// // router.delete("/task/deleteworkspace/:id", deleteWorkspace);
+// router.post("/task/createworkspace",authenticates,createworspace);
+// router.get("/getworkspace",authenticates,getworspace);
+// router.delete("/deleteworkspace/:workspaceId",authenticates,deleteworkspace);
+// router.post("/inviteruser",authenticates,inviteUser);
+// // router.get("/task/getworkspace",authenticates,getWorkspace);
+// // router.put("/task/updateworkspace/:id",authenticates,updateWorkspace);
+// // router.delete("/task/deleteworkspace/:id",authenticates,deleteWorkspace);
 
 
 
-// router.get("/invitesUserole/:receiverId", inviterRole);
+// router.get("/invitesUserole/:receiverId",authenticates,inviterRole);
 
 
-// router.get("/tagemail", tagemail);
-
-
-
-
+// router.get("/tagemail",authenticates,tagemail);
 
 
 
@@ -197,13 +193,17 @@
 
 
 
-// // router.post("/task/createworkspace", createworspace);
-// // router.put("/task/comment/:editingId", updateComment);
-// // router.delete("/task/comment/:id", deletecomment);
-// // router.get('/task/:workspaceId',  getTodos);
-// // router.post('/task/:workspaceId',  createTodo);
-// // router.put('/task/:id/:workspaceId', updateTodo);
-// // router.delete('/task/:id/:workspaceId', deleteTodo);
+
+
+
+
+// // router.post("/task/createworkspace",authenticates,createworspace);
+// // router.put("/task/comment/:editingId",authenticates,updateComment);
+// // router.delete("/task/comment/:id",authenticates,deletecomment);
+// // router.get('/task/:workspaceId',authenticates, getTodos);
+// // router.post('/task/:workspaceId',authenticates, createTodo);
+// // router.put('/task/:id/:workspaceId',authenticates,updateTodo);
+// // router.delete('/task/:id/:workspaceId',authenticates,deleteTodo);
 // export default router;
 
 
@@ -299,7 +299,7 @@ const router = express.Router();
 
 //anylitcal dashboard
 
-router.get("/task/anylitical/:workspaceId", allWorkspaceStatus);
+router.get("/task/anylitical/:workspaceId",authenticates,allWorkspaceStatus);
 
 
 
@@ -314,78 +314,78 @@ router.get("/task/timer/:id", getTimerByTodoId);
 
 
 // 🔔 Notifications
-router.get("/task/notifications/:worksapceId",   getNotifications);
-router.post("/task/notifications/:workspaceId",   createNotification);
-router.delete("/task/notifications/:id",   deleteNotification);
-router.get("/task/viewnotification/:id",   viewNotification);
+router.get("/task/notifications/:worksapceId", authenticates, getNotifications);
+router.post("/task/notifications/:workspaceId", authenticates, createNotification);
+router.delete("/task/notifications/:id", authenticates, deleteNotification);
+router.get("/task/viewnotification/:id", authenticates, viewNotification);
 
 // 📬 Subscription
 router.post('/subscribe', saveSubscription);
 
 // 📧 Mail & Tagging
-router.get("/task/allmail",   allmail);
-router.get("/tagemail",   tagemail);
+router.get("/task/allmail", authenticates, allmail);
+router.get("/tagemail", authenticates, tagemail);
 
 // 📤 Shared Tasks
-router.get("/task/share/:workspaceId",   getShared);
-router.post("/task/sharetodo/:workspaceId", sharetodo )
-router.post("/task/share/:workspaceId",   postShared);
-router.delete("/task/share/:id",   deleteShared);
+router.get("/task/share/:workspaceId", authenticates, getShared);
+router.post("/task/sharetodo/:workspaceId",authenticates,sharetodo )
+router.post("/task/share/:workspaceId", authenticates, postShared);
+router.delete("/task/share/:id", authenticates, deleteShared);
 
 // 🧠 History & CSV
-router.get("/task/history/:workspaceId",   HistoryController);
-router.post("/task/history/delete",   DeleteHistory);
-router.post("/task/csvdata",   createCsv);
+router.get("/task/history/:workspaceId", authenticates, HistoryController);
+router.post("/task/history/delete", authenticates, DeleteHistory);
+router.post("/task/csvdata", authenticates, createCsv);
 
 // ✅ Bulk Actions
-router.post("/task/bulkcomplete",   bulkCompleteTodos);
-router.post("/task/bulkdelete",   bulkDeleteTodos);
+router.post("/task/bulkcomplete", authenticates, bulkCompleteTodos);
+router.post("/task/bulkdelete", authenticates, bulkDeleteTodos);
 
 // 📌 Important & Archived
-router.post("/task/importantupdate/:id",   importantupdate);
-router.put("/task/archieved/:id",   archieved);
+router.post("/task/importantupdate/:id", authenticates, importantupdate);
+router.put("/task/archieved/:id", authenticates, archieved);
 
 // 🧠 Workspace
-router.post("/task/createworkspace",   createworspace);
-router.get("/getworkspace",   getworspace);
-router.delete("/deleteworkspace/:workspaceId",   deleteworkspace);
+router.post("/task/createworkspace", authenticates, createworspace);
+router.get("/getworkspace", authenticates, getworspace);
+router.delete("/deleteworkspace/:workspaceId", authenticates, deleteworkspace);
 
 // 👥 Invites & Roles
-router.post("/inviteruser",   inviteUser);
-router.get("/invitesUserole/:receiverId",   inviterRole);
-router.post("/task/createdinvited/:id",   createInvited);
-router.get("/task/createdinvited/:id",   getInvited);
+router.post("/inviteruser", authenticates, inviteUser);
+router.get("/invitesUserole/:receiverId", authenticates, inviterRole);
+router.post("/task/createdinvited/:id", authenticates, createInvited);
+router.get("/task/createdinvited/:id", authenticates, getInvited);
 
 // 📝 Comments
-router.get("/task/allcomment/:taskId",   showallcomment);
-router.post("/task/comment/:id",   createComment);
-router.put("/task/comment/:editingId",   updateComment);
-router.delete("/task/comment/:id",   deletecomment);
+router.get("/task/allcomment/:taskId", authenticates, showallcomment);
+router.post("/task/comment/:id", authenticates, createComment);
+router.put("/task/comment/:editingId", authenticates, updateComment);
+router.delete("/task/comment/:id", authenticates, deletecomment);
 
 // 📋 Checklist (Work View)
-router.get("/task/getworkchecklistdata/:id",   getworkChecklistdata);
-router.put("/task/workupdate/checklist/:id",   updateChecklist);
-router.delete("/task/workupdate/checklist/:id",   deleteChecklist);
+router.get("/task/getworkchecklistdata/:id", authenticates, getworkChecklistdata);
+router.put("/task/workupdate/checklist/:id", authenticates, updateChecklist);
+router.delete("/task/workupdate/checklist/:id", authenticates, deleteChecklist);
 
 // 📋 Checklist (Todos)
-router.get("/todos/:todoId/checklist",   getChecklistItems);
-router.post("/todos/:todoId/checklist",   createChecklistItem);
-router.put("/checklist/:id",   updateChecklistItem);
-router.delete("/checklist/:id",   deleteChecklistItem);
+router.get("/todos/:todoId/checklist", authenticates, getChecklistItems);
+router.post("/todos/:todoId/checklist", authenticates, createChecklistItem);
+router.put("/checklist/:id", authenticates, updateChecklistItem);
+router.delete("/checklist/:id", authenticates, deleteChecklistItem);
 
 // 🧠 Work Data
-router.get("/task/workdata/:id",   workdata);
-router.put("/task/workupdate/:id",   workupdate);
-router.delete("/task/workdelete/:id",   workdelete);
+router.get("/task/workdata/:id", authenticates, workdata);
+router.put("/task/workupdate/:id", authenticates, workupdate);
+router.delete("/task/workdelete/:id", authenticates, workdelete);
 
 // ✅ Todos (Workspace Scoped)
-router.get('/task/:workspaceId',   getTodos);
-router.post('/task/:workspaceId',   createTodo);
-router.put('/task/:id/:workspaceId',   updateTodo);
-router.delete('/task/:id/:workspaceId',   deleteTodo);
-router.post("/task/sharetodo",   sharetodo);
+router.get('/task/:workspaceId', authenticates, getTodos);
+router.post('/task/:workspaceId', authenticates, createTodo);
+router.put('/task/:id/:workspaceId', authenticates, updateTodo);
+router.delete('/task/:id/:workspaceId', authenticates, deleteTodo);
+router.post("/task/sharetodo", authenticates, sharetodo);
 
 // 🧾 Single Todo (Generic Route — MUST BE LAST)
-router.get("/task/:id",   getTodoById);
+router.get("/task/:id", authenticates, getTodoById);
 
 export default router;
